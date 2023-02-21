@@ -29,41 +29,46 @@ public class BankMenu {
         do {
             System.out.println("********************************************");
             System.out.println("Choose an option");
-            option = sc.next().charAt(0);
-            System.out.println("\n");
+            try {
+                option = sc.next().charAt(0);
+                System.out.println("\n");
 
-            switch (option) {
-                case 'a' -> {
-                    System.out.println("......................");
-                    System.out.println("Balance =" + bankAccount.getBalance());
-                    System.out.println("......................");
-                    System.out.println("\n");
+                switch (option) {
+                    case 'a' -> {
+                        System.out.println("......................");
+                        System.out.println("Balance =" + bankAccount.getBalance());
+                        System.out.println("......................");
+                        System.out.println("\n");
+                    }
+                    case 'b' -> {
+                        System.out.println("......................");
+                        System.out.println("Enter a amount to deposit :");
+                        System.out.println("......................");
+                        double amount = sc.nextDouble();
+                        bankService.deposit(bankAccount, amount);
+                        System.out.println("\n");
+                    }
+                    case 'c' -> {
+                        System.out.println("......................");
+                        System.out.println("Enter a amount to Withdraw :");
+                        System.out.println("......................");
+                        double amountWithdraw = sc.nextDouble();
+                        bankService.withdraw(bankAccount, amountWithdraw);
+                        System.out.println("\n");
+                    }
+                    case 'd' -> {
+                        System.out.println("......................");
+                        System.out.println("Previous Transaction:");
+                        bankAccount.getPreviousTrans();
+                        System.out.println("......................");
+                        System.out.println("\n");
+                    }
+                    case 'e' -> System.out.println("......................");
+                    default -> System.out.println("Choose a correct option to proceed");
                 }
-                case 'b' -> {
-                    System.out.println("......................");
-                    System.out.println("Enter a amount to deposit :");
-                    System.out.println("......................");
-                    double amount = sc.nextDouble();
-                    bankService.deposit(bankAccount, amount);
-                    System.out.println("\n");
-                }
-                case 'c' -> {
-                    System.out.println("......................");
-                    System.out.println("Enter a amount to Withdraw :");
-                    System.out.println("......................");
-                    double amountWithdraw = sc.nextDouble();
-                    bankService.withdraw(bankAccount, amountWithdraw);
-                    System.out.println("\n");
-                }
-                case 'd' -> {
-                    System.out.println("......................");
-                    System.out.println("Previous Transaction:");
-                    bankAccount.getPreviousTrans();
-                    System.out.println("......................");
-                    System.out.println("\n");
-                }
-                case 'e' -> System.out.println("......................");
-                default -> System.out.println("Choose a correct option to proceed");
+            } catch (RuntimeException e) {
+                option = '0';
+                System.out.println("Something went wrong, please try again");
             }
 
         } while (option != 'e');
