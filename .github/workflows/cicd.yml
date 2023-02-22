@@ -15,6 +15,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - run: cd bank-system
       - run: mvn --batch-mode --update-snapshots package
       - run: mkdir staging && cp target/*.jar staging
       - uses: actions/upload-artifact@v3
